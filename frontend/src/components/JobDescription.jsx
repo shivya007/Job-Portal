@@ -20,7 +20,7 @@ const JobDescription = () => {
 
     const applyJobHandler = async () =>{
         try {
-            const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`, {withCredentials: true});
+            const res = await axios.get(`https://job-portal-3kyh.onrender.com/api/v1/apply/${jobId}`, {withCredentials: true});
             if(res.data.success){
                 setIsApplied(true); // Update the local state
                 const updatedSingleJob = {...singleJob, applications:[...singleJob.applications,{applicant:user?._id}]}
@@ -38,7 +38,7 @@ const JobDescription = () => {
     useEffect(()=>{
         const fetchSingleJob = async ()=>{
             try {
-                const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, {withCredentials:true});
+                const res = await axios.get(`https://job-portal-3kyh.onrender.com/api/v1/get/${jobId}`, {withCredentials:true});
                 if(res.data.success){
                     dispatch(setSingleJob(res.data.job));
                     setIsApplied(res.data.job.applications.some(application=>application.applicant === user?._id)) // Ensure the state is in sync with fetched data
